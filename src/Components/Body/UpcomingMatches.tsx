@@ -6,29 +6,41 @@ const StyledGridTable = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
     "number homeTeam awayTeam";
-    padding-bottom:20px;
+    :nth-of-type(odd){
+        background-color:rgba(0, 177, 59, 0.835);
+    }
     `
-const HomeTeam = styled.div`
-    
-    border:1px solid #fff;
-    margin: 0 -1px -1px 0;
+const HeaderDiv = styled.div`
+    color:#0247d9;
+    background-color:rgba(0, 177, 59, 0.835);
+    padding:10px 0;
     font-weight:bold;
-    padding:5px;
+    font-size:20px;
+`
+const HomeHeader = styled(HeaderDiv)`
+    grid-area:homeTeam;
+
+`
+const AwayHeader = styled(HeaderDiv)`
+    grid-area:awayTeam;
+
+`
+const NumberHeader = styled(HeaderDiv)`
+    grid-area:number;
+
+`
+const BodyDiv = styled.div`
+    color:#1963ff;
+    font-weight:bolder;
+    padding:10px;
+`
+const HomeTeam = styled(BodyDiv)`
     grid-area:homeTeam;
     `
-const AwayTeam = styled.div`
-    
-    border:1px solid #fff;
-    margin: 0 -1px -1px 0;
-    font-weight:bold;
-    padding:5px;
+const AwayTeam = styled(BodyDiv)`
     grid-area:awayTeam;
     `
-const NumberDiv = styled.div`
-    
-    border:1px solid #fff;
-    margin: 0 -1px -1px 0;
-    padding:5px;
+const NumberDiv = styled(BodyDiv)`
     grid-area:number;
     
 `
@@ -36,13 +48,18 @@ const NumberDiv = styled.div`
 const StyledA = styled.a`
     padding:5px;
     font-size:18px;
-    color:#fff;
+    color:#004ef5;
 `
 
 const UpcomingMatches = (props) => {
     return(
         <div>
-            {props.data.matches.map((a: { id: string | number | undefined; homeTeam: { id: string; name: any; }; awayTeam: { id: string; name: any; }; },b: number)=>(
+            <StyledGridTable>
+                <NumberHeader>Match</NumberHeader>
+                <HomeHeader>Home</HomeHeader>
+                <AwayHeader>Away</AwayHeader>
+            </StyledGridTable>
+            {props.data.matches.map((a: { id: string | number | undefined; homeTeam: { id: string; name: string; }; awayTeam: { id: string; name: string; }; },b: number)=>(
                 <StyledGridTable key={a.id}>
                     <NumberDiv>
                         <StyledA href={`/match/`+a.id}>Match {b+1}:</StyledA>

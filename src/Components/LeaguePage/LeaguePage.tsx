@@ -6,7 +6,12 @@ import LeagueFilterBody from './LeagueFilterBody';
 import LeagueTable from './LeagueTable';
 
 const StyledMain = styled.main`
-    margin:100px 0 0 250px;
+    margin:75px auto 0 auto;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
 `
 
 const LeaguePage = () =>{

@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import Navbar from './Components/Navbar/Navbar'
 import Body from './Components/Body/Body';
 import LeaguePage from './Components/LeaguePage/LeaguePage';
+import Players from './Components/Players/Players'
 const StyledDiv = styled.div`
 
 width:100%;
@@ -26,6 +27,9 @@ const App = () => {
         </Route>
         <Route exact path='/league/:id'>
           <LeaguePage/>
+        </Route>
+        <Route exact path='/players/:id'>
+          <Players/>
         </Route>
       </Switch>
       </Router>

@@ -8,7 +8,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #5CD1A0
+  background: radial-gradient(circle, rgba(104,220,70,1) 0%, rgba(63,94,251,1) 83%);
 }
 
 code {

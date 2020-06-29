@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledDiv = styled.div`
     display:flex;
     justify-content:center;
-    margin:0 300px;
+    margin:0 320px;
     position:absolute;
     top:0;
     left:0;
@@ -22,10 +22,10 @@ const StyledSearch = styled.div`
     bottom:0;
     width:80px;
     height:80px;
-    background:crimson;
+    background:#003bb8;
     border-radius:50%;
     z-index:4;
-    box-shadow: 0 0 25px 0 crimson;
+    box-shadow: 0 0 25px 0 #003bb8;
     transition: all 1s;
     &:hover{
         cursor:pointer
@@ -41,7 +41,7 @@ const StyledSearch = styled.div`
         left:22px;
         width:12px;
         height:2px;
-        background:white;
+        background:#fff;
         transform:rotate(45deg);
         transition: all .5s;
     }
@@ -72,11 +72,11 @@ const StyledInput = styled.input`
     bottom:0;
     right:0;
     outline:none;
-    background:crimson;
+    background:#003bb8;
     color: white;
     border:none;
-    text-shadow: 0 0 10px crimson;
-    box-shadow: 0 0 25px 0 crimson,
+    text-shadow: 0 0 10px #003bb8;
+    box-shadow: 0 0 25px 0 #003bb8,
                 0 20px 25px 0 rgba(0, 0, 0, 0.2);
     padding: 0 20px 0 80px;
     border-radius: 30px;

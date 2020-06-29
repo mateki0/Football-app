@@ -1,28 +1,28 @@
 import React from 'react'
 import styled from 'styled-components';
-const StyledMain = styled.main`
-    margin-left:250px;
-`
+
+const SeasonInfo = styled.div`
+    display:flex;  
+    flex-direction:column;`
 const CurrentDiv = styled.div`
     display:flex;
     align-items:center;
-    justify-content:space-around;
 `
-const CurrentSeason = styled.h2`
-    color:#fff;
+const CurrentSeason = styled.h1`
+    color:#0247d9;
     text-align:center;
 `
 const CurrentDates = styled.span`
-    color:#fff;
+    color:#0247d9;
     font-size:18px;
-    padding:0 5px;
+    padding:0 20px;
 `
 const LeagueFilterBody = (props) =>{
     
     if(props.isLoading === false){
     return(
         
-            <div>
+            <SeasonInfo>
                     <CurrentSeason>Current Season {props.league.currentSeason.startDate.slice(0,4)}/{props.league.currentSeason.endDate.slice(0,4)}:</CurrentSeason>
                     <CurrentDiv>
                         <CurrentDates>Started: {props.league.currentSeason.startDate}</CurrentDates>
@@ -30,7 +30,7 @@ const LeagueFilterBody = (props) =>{
                         <CurrentDates>Ending: {props.league.currentSeason.endDate}</CurrentDates>
                         
                     </CurrentDiv>
-                </div>
+                </SeasonInfo>
         
     )}
     return(
