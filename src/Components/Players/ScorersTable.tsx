@@ -25,8 +25,6 @@ padding:10px 0;
 font-weight:bold;
 font-size:20px;
     `
-
-
 const BodyDiv = styled.div`
 color:#0247d9;
 font-weight:bolder;
@@ -36,7 +34,9 @@ font-weight:bolder;
 const Competitions = styled.h2`
 font-weight:bold;
 `
-
+const TeamNameHref = styled.a`
+    color:#0247d9;
+`
 const ScorersTable:FunctionComponent<{players: any, isPlayersLoading:boolean}> = (props) =>{
     console.log(props.isPlayersLoading)
     if(props.isPlayersLoading === false){
@@ -63,7 +63,7 @@ const ScorersTable:FunctionComponent<{players: any, isPlayersLoading:boolean}> =
                 {props.players.scorers.map((a:{player:{name:string; id:number; nationality:string; position:string}; team:{id:number; name:string};numberOfGoals:number }, b: string | number | undefined) =>
                     <StyledGridTable key={b}>
                         <BodyDiv>
-                            {a.player.name}
+                        <TeamNameHref href={`/players/`+a.player.id}>{a.player.name}</TeamNameHref>
                         </BodyDiv>
                         <BodyDiv>
                             {a.numberOfGoals}
@@ -72,7 +72,7 @@ const ScorersTable:FunctionComponent<{players: any, isPlayersLoading:boolean}> =
                             {a.player.position}
                         </BodyDiv>
                         <BodyDiv>
-                            {a.team.name}
+                        <TeamNameHref href={`/team/`+a.team.id}>{a.team.name}</TeamNameHref>
                         </BodyDiv>
                         <BodyDiv>
                             {a.player.nationality}

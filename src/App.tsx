@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,15 +8,12 @@ import styled from 'styled-components';
 import Navbar from './Components/Navbar/Navbar'
 import Body from './Components/Body/Body';
 import LeaguePage from './Components/LeaguePage/LeaguePage';
-import Players from './Components/Players/Players'
+import BestScorers from './Components/Players/BestScorers';
 const StyledDiv = styled.div`
 
 width:100%;
 `
 const App = () => {
-  
-  
-  
   return (
     <StyledDiv >
       <Router>
@@ -28,8 +25,8 @@ const App = () => {
         <Route exact path='/league/:id'>
           <LeaguePage/>
         </Route>
-        <Route exact path='/players/:id'>
-          <Players/>
+        <Route exact path='/bestscorers/:id'>
+          <BestScorers/>
         </Route>
       </Switch>
       </Router>

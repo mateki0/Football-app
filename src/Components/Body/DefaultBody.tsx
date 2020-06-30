@@ -29,7 +29,7 @@ const DefaultBody = () =>{
 //         const result = await axios({method:'GET',
 //         url: proxy+'http://api.football-data.org/v2/matches',
 //         headers:{
-//             'X-Auth-Token':'eea93b6682e94ab9b2bff2c734e753de',
+//             'X-Auth-Token':process.env.REACT_APP_API_KEY,
             
 //         }});
 //         console.log(result)

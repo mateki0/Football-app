@@ -1,10 +1,9 @@
 import React, {useState,useEffect} from 'react';
 import {useParams} from 'react-router';
 import axios from 'axios';
-import styled from 'styled-components';
 import ScorersTable from './ScorersTable';
 
-const Players = () =>{
+const BestScorers = () =>{
 
     let {id} = useParams();
     const [players, setPlayers] = useState<Array<object>>([]);
@@ -16,12 +15,12 @@ const Players = () =>{
         const result = await axios({method:'GET',
         url: proxy+url,
         headers:{
-            'X-Auth-Token':'eea93b6682e94ab9b2bff2c734e753de',
+            'X-Auth-Token': process.env.REACT_APP_API_KEY,
             
         }});
-        console.log(result)
-        setPlayers(result.data)
-        setIsPlayersLoading(false)
+        console.log(result);
+        setPlayers(result.data);
+        setIsPlayersLoading(false);
       }catch (error){
           console.log(error)
       }
@@ -29,10 +28,10 @@ const Players = () =>{
     }
     fetchPlayers('http://api.football-data.org/v2/competitions/'+ id+'/scorers')
   },[id])
-  console.log(players)
+  
   return(
     <ScorersTable players={players} isPlayersLoading={isPlayersLoading} />
   )
 }
 
-export default Players;
+export default BestScorers;
