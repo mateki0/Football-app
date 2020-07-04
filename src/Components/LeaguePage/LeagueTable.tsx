@@ -1,70 +1,58 @@
-import React,{FunctionComponent} from 'react'
+import React,{FunctionComponent, useState, useEffect} from 'react';
+import NationalLeague from './NationalLeague'
 import styled from 'styled-components';
-
+import LoadingIcon from '../LoadingIcon';
+import axios from 'axios'
 const StyledTableDiv = styled.div`
 margin-top:50px;`
 const StyledGridTable = styled.div`   
     text-align:center;
     display:grid;
     grid-template-columns: 100px 280px 150px 120px 100px ;
-    grid-template-areas:
-    "pos team played goals points";
-
+    
     :nth-of-type(odd){
-        background-color:rgba(0, 177, 59, 0.835);
+        background-color:rgba(0, 177, 59, 0.735);
     }
     `
     const HeaderDiv = styled.div`
     color:#0247d9;
-background-color:rgba(0, 177, 59, 0.835);
-padding:10px 0;
-font-weight:bold;
-font-size:20px;
+    background-color:rgba(0, 177, 59, 0.735);
+    padding:10px 0;
+    font-weight:bold;
+    font-size:20px;
     `
-    const PositionHeader = styled(HeaderDiv)`
-grid-area:pos;
-
-`
-const TeamHeader = styled(HeaderDiv)`
-grid-area:team;
-
-`
-const PlayedHeader = styled(HeaderDiv)`
-grid-area:played;
-
-`
-const GoalsHeader = styled(HeaderDiv)`
-grid-area:goals;
-
-`
-const PointsHeader = styled(HeaderDiv)`
-grid-area:points;
-
-`
 const BodyDiv = styled.div`
-color:#0247d9;
-font-weight:bolder;
+    color:#0247d9;
+    font-weight:bolder;
     padding:10px;
     
 `
-const PosDiv = styled(BodyDiv)`
-    grid-area:pos;
+const LoadingDiv = styled.div`
+display:flex;
+justify-content:center;
+margin-top:15px ;
+`
+const FilterSelect = styled.ul`
     
+    cursor:pointer;
+    list-style-type:none;
+    padding:5px 15px;
+    justify-content: center;
+    display: ${({league}) =>
+    league === 'CL' && 'flex' ||
+    league !== 'CL' && 'none'
+}
 `
-const TeamDiv =  styled(BodyDiv)`
-    grid-area: team;
+const FilterOption = styled.li`
+    padding:0 5px;
 `
-const PlayedDiv  = styled(BodyDiv)`
-    grid-area: played;
-`
-const GoalsDiv = styled(BodyDiv)`
-    grid-area: goals;
-` 
-const PointsDiv  = styled(BodyDiv)`
-    grid-area:points;
-`
-const TeamNameHref = styled.a`
-    color:#0247d9;
+const FilterButton = styled.button`
+    padding:5px 10px;
+    cursor:pointer;
+    background:#003bb8;
+    color:#EBFFEB;
+    border-radius:5px;
+    border-color:#003bb8;
 `
 interface Team{
     name?:string;
@@ -87,53 +75,102 @@ interface StandingsType{
     standings:Standings;
 }
 
-const LeagueTable:FunctionComponent<{standings: any, isTableLoading:boolean}> = (props) => {
-    console.log(props.standings)
-    if(props.isTableLoading === false){
+
+
+
+
+const LeagueTable:FunctionComponent<{id:string}> = (props) => {
+    const [filterLeague, setFilter] = useState<string>('A');
+    const [defaultTable, setDefaultTable] = useState<Array<any>>([]);
+    const [leagueTable, setLeagueTable] = useState<Array<object>>([]);
+    const [isTableLoading, setIsTableLoading] = useState(true)
+    useEffect(() =>{
     
+        const fetchStandings = async(url: string)=> {
+            const proxy = 'https://serene-temple-39805.herokuapp.com/'
+            try{
+            const result = await axios({method:'GET',
+            url: proxy+url,
+            headers:{
+                'X-Auth-Token':'eea93b6682e94ab9b2bff2c734e753de',
+                
+            }});
+            setLeagueTable(result.data)
+            setDefaultTable(result.data['standings'][0])
+            setIsTableLoading(false)
+        }catch (error){
+            console.log(error)
+        }
+        }
+        fetchStandings('http://api.football-data.org/v2/competitions/'+ props.id +'/standings');
+        
+    }, [props.id]);
+
+
+    useEffect(()=>{
+        let currentFilter:Array<any>;
+        
+        if(isTableLoading === false){
+            currentFilter = leagueTable['standings'].filter((a:{type:string, group:string})=> a.type==="TOTAL" && a.group === `GROUP_${filterLeague}`);
+            setDefaultTable(currentFilter[0]);
+        }
+        
+    },[filterLeague,leagueTable, isTableLoading]);
+    
+
+    if(isTableLoading === false){
     return(
+        <div>
+            <FilterSelect league={props.id}>
+                <FilterOption >
+                    <FilterButton value="A" onClick={(e: { currentTarget: { value: React.SetStateAction<string>; }; })=>setFilter(e.currentTarget.value)}>Group A</FilterButton>
+                </FilterOption>
+                <FilterOption>
+                    <FilterButton value="B" onClick={(e: { currentTarget: { value: React.SetStateAction<string>; }; })=>setFilter(e.currentTarget.value)}>Group B</FilterButton>
+                </FilterOption>
+                <FilterOption>
+                    <FilterButton value="C" onClick={(e: { currentTarget: { value: React.SetStateAction<string>; }; })=>setFilter(e.currentTarget.value)}>Group C</FilterButton>
+                </FilterOption>
+                <FilterOption>
+                    <FilterButton value="D" onClick={(e: { currentTarget: { value: React.SetStateAction<string>; }; })=>setFilter(e.currentTarget.value)}>Group D</FilterButton>
+                </FilterOption>
+                <FilterOption>
+                    <FilterButton value="E" onClick={(e: { currentTarget: { value: React.SetStateAction<string>; }; })=>setFilter(e.currentTarget.value)}>Group E</FilterButton>
+                </FilterOption>
+                <FilterOption>
+                    <FilterButton value="F" onClick={(e: { currentTarget: { value: React.SetStateAction<string>; }; })=>setFilter(e.currentTarget.value)}>Group H</FilterButton>
+                </FilterOption>
+            </FilterSelect>
         <StyledTableDiv>
             <StyledGridTable >
-                <PositionHeader>
-                Position
-                </PositionHeader>
-                <TeamHeader>
+                <HeaderDiv>
+                    Position
+                </HeaderDiv>
+                <HeaderDiv>
                     Team
-                </TeamHeader>
-                <PlayedHeader>
+                </HeaderDiv>
+                <HeaderDiv>
                     Played Games
-                </PlayedHeader>
-                <GoalsHeader>
+                </HeaderDiv>
+                <HeaderDiv>
                     Goals
-                </GoalsHeader>
-                <PointsHeader>
+                </HeaderDiv>
+                <HeaderDiv>
                     Points
-                </PointsHeader>
+                </HeaderDiv>
         </StyledGridTable>
+        
+        
+            {defaultTable['table'].map((a: { position: number; team: { id: string; name: string; }; playedGames: number; goalsFor:number; goalsAgainst: number; goalDifference: number; points: number; },b: string | number | undefined) => 
+               <NationalLeague key={b} a={a}/>
+            )}
             
-            {props.standings.standings[0].table.map((a: { position: number; team: { id: string; name: string; }; playedGames: number; goalsFor:number; goalsAgainst: number; goalDifference: number; points: number; },b: string | number | undefined) => 
-                <StyledGridTable key={b}>
-                    <PosDiv>
-                        {a.position}.
-                    </PosDiv>
-                    <TeamDiv>
-                        <TeamNameHref href={`/team/`+a.team.id}>{a.team.name}</TeamNameHref>
-                    </TeamDiv>
-                    <PlayedDiv>
-                        {a.playedGames}
-                    </PlayedDiv>
-                    <GoalsDiv>
-                        {a.goalsFor}:{a.goalsAgainst}({a.goalDifference})
-                    </GoalsDiv>
-                    <PointsDiv>
-                        {a.points}
-                    </PointsDiv>
-                </StyledGridTable>
-            )} 
         </StyledTableDiv>
+        </div>
+        
     )}
     return(
-        <div>Loading</div>
+        <LoadingDiv><LoadingIcon/></LoadingDiv>
     )
 }
 

@@ -1,5 +1,6 @@
 import React,{FunctionComponent} from 'react';
 import styled from 'styled-components';
+import LoadingIcon from '../LoadingIcon';
 const StyledMain = styled.main`
     margin:75px auto 0 auto;
     height:100%;
@@ -12,15 +13,13 @@ const StyledGridTable = styled.div`
     text-align:center;
     display:grid;
     grid-template-columns: 250px 100px 100px 250px 150px ;
-    grid-template-areas:
-    "name goals pos team nationality"
     :nth-of-type(odd){
-        background-color:rgba(0, 177, 59, 0.835);
+        background-color:rgba(0, 177, 59, 0.735);
     }
     `
     const HeaderDiv = styled.div`
     color:#0247d9;
-background-color:rgba(0, 177, 59, 0.835);
+background-color:rgba(0, 177, 59, 0.735);
 padding:10px 0;
 font-weight:bold;
 font-size:20px;
@@ -37,8 +36,27 @@ font-weight:bold;
 const TeamNameHref = styled.a`
     color:#0247d9;
 `
-const ScorersTable:FunctionComponent<{players: any, isPlayersLoading:boolean}> = (props) =>{
-    console.log(props.isPlayersLoading)
+const FiltersButton = styled.button`
+padding: 7px 18px;
+border:none;
+background:#0247d9;
+color:#EBFFEB;
+margin-top:20px;
+font-size:16px;
+font-weight:600;
+transition: all .5s;
+&:hover{
+    color:rgba(104,220,70,1);
+    cursor:pointer;
+}
+`
+const LoadingDiv = styled.div`
+display:flex;
+justify-content:center;
+margin-top:15px ;
+`
+const ScorersTable:FunctionComponent<{players: any, isPlayersLoading:boolean, more:any, less:any, showMore:boolean}> = (props) =>{
+    console.log(props.showMore)
     if(props.isPlayersLoading === false){
     return(
         <StyledMain>
@@ -79,11 +97,16 @@ const ScorersTable:FunctionComponent<{players: any, isPlayersLoading:boolean}> =
                         </BodyDiv>
                     </StyledGridTable>
                 )}
+                {!props.showMore ? (
+                <FiltersButton  onClick={props.more}>Show More</FiltersButton>
+                ) : <FiltersButton  onClick={props.less}>Show Less</FiltersButton>}
         </StyledMain>
     )
     }
     return(
-        <div>Loading...</div>
+        <LoadingDiv>
+            <LoadingIcon/>
+        </LoadingDiv>
     )
 }
 

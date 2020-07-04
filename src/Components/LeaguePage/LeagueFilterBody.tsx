@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import LoadingIcon from '../LoadingIcon';
 
 const SeasonInfo = styled.div`
     display:flex;  
@@ -16,6 +17,11 @@ const CurrentDates = styled.span`
     color:#0247d9;
     font-size:18px;
     padding:0 20px;
+`
+const LoadingDiv = styled.div`
+display:flex;
+justify-content:center;
+margin-top:15px ;
 `
 const LeagueFilterBody = (props) =>{
     
@@ -34,7 +40,7 @@ const LeagueFilterBody = (props) =>{
         
     )}
     return(
-        <div>Loading</div>
+        <LoadingDiv><LoadingIcon/></LoadingDiv>
     )
 }
 export default LeagueFilterBody;

@@ -8,6 +8,13 @@ const BestScorers = () =>{
     let {id} = useParams();
     const [players, setPlayers] = useState<Array<object>>([]);
     const [isPlayersLoading, setIsPlayersLoading] = useState(true); 
+    const [showMore, setShowMore] = useState(false);
+    const more = () => {
+      setShowMore(true)
+    }
+    const less = () => {
+      setShowMore(false)
+    }
       useEffect(()=>{
     const fetchPlayers = async(url: string) =>{
       const proxy = 'https://serene-temple-39805.herokuapp.com/'
@@ -24,13 +31,16 @@ const BestScorers = () =>{
       }catch (error){
           console.log(error)
       }
-     
     }
-    fetchPlayers('http://api.football-data.org/v2/competitions/'+ id+'/scorers')
-  },[id])
+    if(showMore === false){
+      fetchPlayers('http://api.football-data.org/v2/competitions/'+ id+'/scorers')
+    } else{
+      fetchPlayers('http://api.football-data.org/v2/competitions/'+ id+'/scorers?limit=20')
+    }
+  },[id,showMore])
   
   return(
-    <ScorersTable players={players} isPlayersLoading={isPlayersLoading} />
+    <ScorersTable players={players} isPlayersLoading={isPlayersLoading} more={more} less={less} showMore={showMore}/>
   )
 }
 

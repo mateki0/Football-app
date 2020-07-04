@@ -64,15 +64,24 @@ const NavLinks = () =>{
                     <StyledA href="/">Football App</StyledA>
                 </TitleDiv>
                 <LeaguesUl>
+                    <StyledLi><StyledLiTitle>Standings</StyledLiTitle></StyledLi>
                     <StyledLi><StyledLink to='/league/2021'>Premier League</StyledLink></StyledLi>
                     <StyledLi><StyledLink to='/league/2014'>Primera Division</StyledLink></StyledLi>
                     <StyledLi><StyledLink to='/league/2002'>Bundesliga</StyledLink></StyledLi>
                     <StyledLi><StyledLink to='/league/2015'>League 1</StyledLink></StyledLi>
                     <StyledLi><StyledLink to='/league/2019'>Serie A</StyledLink></StyledLi>
+                    <StyledLi><StyledLink to='/league/CL'>Champions League</StyledLink></StyledLi>
                 </LeaguesUl>
                 <ChampionsUl>
-                    <StyledLi><StyledLink to='/league/CL'>Champions League</StyledLink></StyledLi>
+                    <StyledLi><StyledLiTitle>Upcoming</StyledLiTitle></StyledLi>
+                    <StyledLi><StyledLink to='/upcomingmatches/2021'>Premier League</StyledLink></StyledLi>
+                    <StyledLi><StyledLink to='/upcomingmatches/2014'>Primera Division</StyledLink></StyledLi>
+                    <StyledLi><StyledLink to='/upcomingmatches/2002'>Bundesliga</StyledLink></StyledLi>
+                    <StyledLi><StyledLink to='/upcomingmatches/2015'>League 1</StyledLink></StyledLi>
+                    <StyledLi><StyledLink to='/upcomingmatches/2019'>Serie A</StyledLink></StyledLi>
+                    <StyledLi><StyledLink to='/upcomingmatches/CL'>Champions League</StyledLink></StyledLi>
                 </ChampionsUl>
+                
                 <ChampionsUl>
                   <StyledLi><StyledLiTitle>Best Scorers</StyledLiTitle></StyledLi>
                   <StyledLi><StyledLink to='/bestscorers/2021'>Premier League</StyledLink></StyledLi>
