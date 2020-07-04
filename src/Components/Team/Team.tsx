@@ -8,4 +8,4 @@ const Team = () => (
 
 export default Team;
 
-// strona druzyny do dokonczenia, wymyslic wyszukiwanie, strona meczu, strona tabeli ligi mistrzow
+//  wymyslic wyszukiwanie, strona meczu

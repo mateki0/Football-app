@@ -21,12 +21,6 @@ const StyledGridTable = styled.div`
     font-weight:bold;
     font-size:20px;
     `
-const BodyDiv = styled.div`
-    color:#0247d9;
-    font-weight:bolder;
-    padding:10px;
-    
-`
 const LoadingDiv = styled.div`
 display:flex;
 justify-content:center;
@@ -39,8 +33,8 @@ const FilterSelect = styled.ul`
     padding:5px 15px;
     justify-content: center;
     display: ${({league}) =>
-    league === 'CL' && 'flex' ||
-    league !== 'CL' && 'none'
+    (league === 'CL' && 'flex') ||
+    (league !== 'CL' && 'none')
 }
 `
 const FilterOption = styled.li`
@@ -87,7 +81,7 @@ const LeagueTable:FunctionComponent<{id:string}> = (props) => {
     useEffect(() =>{
     
         const fetchStandings = async(url: string)=> {
-            const proxy = 'https://serene-temple-39805.herokuapp.com/'
+            const proxy = 'https://serene-temple-39805.herokuapp.com/';
             try{
             const result = await axios({method:'GET',
             url: proxy+url,
@@ -95,11 +89,11 @@ const LeagueTable:FunctionComponent<{id:string}> = (props) => {
                 'X-Auth-Token':'eea93b6682e94ab9b2bff2c734e753de',
                 
             }});
-            setLeagueTable(result.data)
-            setDefaultTable(result.data['standings'][0])
-            setIsTableLoading(false)
+            setLeagueTable(result.data);
+            setDefaultTable(result.data['standings'][0]);
+            setIsTableLoading(false);
         }catch (error){
-            console.log(error)
+            console.log(error);
         }
         }
         fetchStandings('http://api.football-data.org/v2/competitions/'+ props.id +'/standings');
@@ -110,12 +104,12 @@ const LeagueTable:FunctionComponent<{id:string}> = (props) => {
     useEffect(()=>{
         let currentFilter:Array<any>;
         
-        if(isTableLoading === false){
+        if(isTableLoading === false && props.id === 'CL'){
             currentFilter = leagueTable['standings'].filter((a:{type:string, group:string})=> a.type==="TOTAL" && a.group === `GROUP_${filterLeague}`);
             setDefaultTable(currentFilter[0]);
         }
         
-    },[filterLeague,leagueTable, isTableLoading]);
+    },[filterLeague,leagueTable, isTableLoading, props.id]);
     
 
     if(isTableLoading === false){
