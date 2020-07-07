@@ -3,6 +3,7 @@ import {useParams} from 'react-router';
 import axios from 'axios';
 import ScorersTable from './ScorersTable';
 
+
 const BestScorers = () =>{
 
     let {id} = useParams();
@@ -25,7 +26,7 @@ const BestScorers = () =>{
             'X-Auth-Token': process.env.REACT_APP_API_KEY,
             
         }});
-        console.log(result);
+        
         setPlayers(result.data);
         setIsPlayersLoading(false);
       }catch (error){
@@ -40,7 +41,10 @@ const BestScorers = () =>{
   },[id,showMore])
   
   return(
-    <ScorersTable players={players} isPlayersLoading={isPlayersLoading} more={more} less={less} showMore={showMore}/>
+    
+      <ScorersTable players={players} isPlayersLoading={isPlayersLoading} more={more} less={less} showMore={showMore}/>
+   
+    
   )
 }
 

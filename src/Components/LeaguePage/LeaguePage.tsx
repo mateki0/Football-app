@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import LeagueFilterBody from './LeagueFilterBody';
 import LeagueTable from './LeagueTable';
-
+import SearchBar from '../SearchBar';
 const StyledMain = styled.main`
     margin:75px auto 0 auto;
     height:100%;
@@ -48,6 +48,7 @@ const LeaguePage = () =>{
     
     return(
         <StyledMain>
+            
             <LeagueFilterBody league={league} isLoading={isLoading}/>
             <LeagueTable id={id} />
         </StyledMain>

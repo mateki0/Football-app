@@ -56,11 +56,11 @@ justify-content:center;
 margin-top:15px ;
 `
 const ScorersTable:FunctionComponent<{players: any, isPlayersLoading:boolean, more:any, less:any, showMore:boolean}> = (props) =>{
-    console.log(props.showMore)
     if(props.isPlayersLoading === false){
+        console.log(props.players)
     return(
         <StyledMain>
-            <Competitions>Premier League</Competitions>
+            <Competitions>{props.players['competition'].name } Best Scorers</Competitions>
                 <StyledGridTable >
                     <HeaderDiv>
                         Name
@@ -97,7 +97,7 @@ const ScorersTable:FunctionComponent<{players: any, isPlayersLoading:boolean, mo
                         </BodyDiv>
                     </StyledGridTable>
                 )}
-                {!props.showMore ? (
+                {props.players.scorers.length === 10 ? (
                 <FiltersButton  onClick={props.more}>Show More</FiltersButton>
                 ) : <FiltersButton  onClick={props.less}>Show Less</FiltersButton>}
         </StyledMain>

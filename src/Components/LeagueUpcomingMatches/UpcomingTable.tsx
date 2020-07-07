@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{FunctionComponent} from 'react';
 import AllUpcomingMatches from '../Body/AllUpcomingMatches'
 import styled from 'styled-components';
 import LoadingIcon from '../LoadingIcon';
@@ -23,24 +23,31 @@ const LeagueOver = styled.h1`
     color:#0247d9;
     text-align:center;
 `
-interface DataType{
-    matches:Array<any>;
-    stage:string;
-    isMatchesLoading:boolean
+interface MatchesType{
+    
+        count:number;
+        matches:Array<any>;
+        competition:Object;
+    
 }
-const UpcomingTable = (props) =>{
-    if(!props.isMatchesLoading && props.matches.count===0){
+interface DataType{
+    matches:MatchesType;
+    isMatchesLoading:boolean;
+}
+
+const UpcomingTable:FunctionComponent<{isMatchesLoading: any, matches: Array<any>}> = (props) =>{
+    if(!props.isMatchesLoading && props.matches['count']===0){
         return(
             <StyledMain>
                 <LeagueOver>This league is over. Or there are currently no matches scheduled.</LeagueOver>
             </StyledMain>
         )
     }
-    if(!props.isMatchesLoading && props.matches.count>0){
-    const stage:Array<DataType>= props.matches.matches[0].stage.replace(/_/g, ' ').toLowerCase();
+    if(!props.isMatchesLoading && props.matches['count']>0){
+    const stage:Array<DataType>= props.matches['matches'][0].stage.replace(/_/g, ' ').toLowerCase();
     return(
         <StyledMain>
-            <StyledH1>Champions League {stage} stage.</StyledH1>
+            <StyledH1>{props.matches['competition'].name} {stage} stage.</StyledH1>
             <AllUpcomingMatches data={props.matches}/>
         </StyledMain>
         

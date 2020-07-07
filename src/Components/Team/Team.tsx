@@ -2,7 +2,10 @@ import React from 'react';
 import TeamTable from './TeamTable';
 
 const Team = () => (
+    
     <TeamTable/>
+    
+    
 )
 
 

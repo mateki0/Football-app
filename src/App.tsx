@@ -11,30 +11,69 @@ import LeaguePage from './Components/LeaguePage/LeaguePage';
 import BestScorers from './Components/Players/BestScorers';
 import LeagueUpcomingMatches from './Components/LeagueUpcomingMatches/LeagueUpcomingMatches'
 import Team from './Components/Team/Team';
+import SearchBar from './Components/SearchBar';
+import PlayerSearch from './Components/PlayerSearch/PlayerSearch';
+import CompetitionsSearch from './Components/CompetitionsSearch/CompetitionsSearch';
+
 const StyledDiv = styled.div`
 
 width:100%;
+display:grid;
+grid-template-columns: 250px 1fr;
 `
 const App = () => {
   return (
     <StyledDiv >
       <Router>
-        <Navbar />
       <Switch>
         <Route exact path="/">
-          <Body/>
+          <Navbar />
+          <div>
+            <SearchBar/>
+            <Body/>
+          </div>
         </Route>
         <Route exact path='/league/:id'>
-          <LeaguePage/>
+          <Navbar />
+          <div>
+            <SearchBar/>
+            <LeaguePage/>
+          </div>
         </Route>
         <Route exact path='/bestscorers/:id'>
-          <BestScorers/>
+          <Navbar />
+          <div>
+            <SearchBar/>
+            <BestScorers/>
+          </div>
         </Route>
         <Route exact path='/upcomingmatches/:id'>
-          <LeagueUpcomingMatches/>
+          <Navbar />
+          <div>
+            <SearchBar/>
+            <LeagueUpcomingMatches/>
+          </div>
         </Route>
         <Route exact path='/team/:id'>
-          <Team/>
+          <Navbar />
+          <div>
+            <SearchBar/>
+            <Team/>
+          </div>
+        </Route>
+        <Route exact path='/player/:query'>
+          <Navbar/>
+          <div>
+            <SearchBar/>
+            <PlayerSearch/>
+          </div>
+        </Route>
+        <Route exact path='/competitions/:query'>
+          <Navbar/>
+          <div>
+            <SearchBar/>
+            <CompetitionsSearch/>
+          </div>
         </Route>
       </Switch>
       </Router>
