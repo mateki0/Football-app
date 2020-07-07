@@ -23,7 +23,7 @@ display:flex;
 justify-content:center;
 margin-top:15px ;
 `
-const LeagueFilterBody = (props) =>{
+const LeagueHeader = (props) =>{
     
     if(props.isLoading === false){
     return(
@@ -43,4 +43,4 @@ const LeagueFilterBody = (props) =>{
         <LoadingDiv><LoadingIcon/></LoadingDiv>
     )
 }
-export default LeagueFilterBody;
+export default LeagueHeader;

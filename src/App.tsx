@@ -12,8 +12,8 @@ import BestScorers from './Components/Players/BestScorers';
 import LeagueUpcomingMatches from './Components/LeagueUpcomingMatches/LeagueUpcomingMatches'
 import Team from './Components/Team/Team';
 import SearchBar from './Components/SearchBar';
-import PlayerSearch from './Components/PlayerSearch/PlayerSearch';
 import CompetitionsSearch from './Components/CompetitionsSearch/CompetitionsSearch';
+import SingleMatch from './Components/SingleMatch/SingleMatch';
 
 const StyledDiv = styled.div`
 
@@ -61,18 +61,18 @@ const App = () => {
             <Team/>
           </div>
         </Route>
-        <Route exact path='/player/:query'>
-          <Navbar/>
-          <div>
-            <SearchBar/>
-            <PlayerSearch/>
-          </div>
-        </Route>
         <Route exact path='/competitions/:query'>
           <Navbar/>
           <div>
             <SearchBar/>
             <CompetitionsSearch/>
+          </div>
+        </Route>
+        <Route exact path='/match/:id'>
+          <Navbar/>
+          <div>
+            <SearchBar/>
+            <SingleMatch/>
           </div>
         </Route>
       </Switch>

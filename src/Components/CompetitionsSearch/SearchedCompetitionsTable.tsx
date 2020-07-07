@@ -19,13 +19,21 @@ const BodyDiv = styled.div`
 `
 const HeaderDiv = styled.div`
     color:#0247d9;
-background-color:rgba(0, 177, 59, 0.735);
-padding:10px 0;
-font-weight:bold;
-font-size:20px;
+    background-color:rgba(0, 177, 59, 0.735);
+    padding:10px 0;
+    font-weight:bold;
+    font-size:20px;
     `
+const TeamNameHref = styled.a`
+    color:#0247d9;
+`
 const SearchedCompetitionsTable:FunctionComponent<{searchedCompetitions:Array<any>}> = (props) => {
     console.log(props.searchedCompetitions)
+    if (props.searchedCompetitions.length === 0){
+        return(
+            <BodyDiv>No matching results</BodyDiv>
+        )
+    }
     return(
         <div>
             <StyledGridTable >
@@ -45,7 +53,9 @@ const SearchedCompetitionsTable:FunctionComponent<{searchedCompetitions:Array<an
         {props.searchedCompetitions.map((a,b)=>(
     <StyledGridTable key={b}>
                     <BodyDiv>
-                        {a['name']}
+                    {a.plan==="TIER_ONE" ? 
+                        <TeamNameHref href={`/league/${a.id}`}>{a['name']}</TeamNameHref> :
+                        a['name']}
                     </BodyDiv>
                     <BodyDiv>
                         {a['currentSeason']['startDate']}

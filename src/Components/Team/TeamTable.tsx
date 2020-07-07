@@ -103,6 +103,9 @@ const FilterButton = styled.button`
     border-radius:5px;
     border-color:#003bb8;
 `
+const CoachSpan = styled.span`
+    text-transform: capitalize;
+`
 const TeamTable = () =>{
     let {id} = useParams();
     const [team, setTeam] = useState<Array<object>>([]);
@@ -212,7 +215,7 @@ return(
         {squad.map((a, b) => (
             <StyledGridTable key={b}>
                 <BodyDiv><StyledA href={`/player/${a['id']}`}>{a['name']}</StyledA></BodyDiv>
-                <BodyDiv>{a['position'] === null ? a['role'] : a['position']}</BodyDiv>
+                <BodyDiv><CoachSpan>{a['position'] === null ? a['role'].toLowerCase() : a['position']}</CoachSpan></BodyDiv>
                 <BodyDiv>{moment().diff(a['dateOfBirth'], 'years')}</BodyDiv>
                 <BodyDiv><StyledA>{a['nationality']}</StyledA></BodyDiv>
             </StyledGridTable>

@@ -10,10 +10,10 @@ const BestScorers = () =>{
     const [players, setPlayers] = useState<Array<object>>([]);
     const [isPlayersLoading, setIsPlayersLoading] = useState(true); 
     const [showMore, setShowMore] = useState(false);
-    const more = () => {
+    const more = ():void => {
       setShowMore(true)
     }
-    const less = () => {
+    const less = ():void => {
       setShowMore(false)
     }
       useEffect(()=>{

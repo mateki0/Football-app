@@ -1,6 +1,6 @@
-import React,{useState,useEffect,useRef} from 'react'
+import React,{useState,useRef} from 'react'
 import styled from 'styled-components';
-import {ChevronDown, ChevronUp} from '@styled-icons/boxicons-solid'
+
 
 const StyledDiv = styled.div`
     position:absolute;
@@ -102,36 +102,7 @@ const StyledSearch = styled.div`
     }
     
 `
-const StyledFilter = styled.div`
-    margin: auto;
-    position:absolute;
-    top:0;
-    left:${({open}) =>
-    (open === true && '220px') ||
-    (open === false && '0')
-};
-    right:0;
-    bottom:0;
-    border-radius: 30px;
-    padding: 0 10px;
-    height:40px;
-    background:transparent;
-    color: white;
-    opacity:${({open}) =>
-    (open === true && '1') ||
-    (open === false && '0')
-};
-    z-index:${({open}) =>
-    (open === true && '6') ||
-    (open === false && '5')
-};
-    outline:none;
-    cursor:pointer;
-    transition:all 1s;
-    letter-spacing:0.1em;
-    font-weight:600;
-    border:none;
-`
+
 const StyledInput = styled.input`
     position:absolute;
     width: ${({open}) =>
@@ -180,112 +151,24 @@ const StyledInput = styled.input`
 `
 
 
-const StyledDropdown = styled.div`
-    position:absolute;
-    text-align:center;
-    margin:0;
-    width:130px;
-    top:45px;
-    left:0;
-    right:0;
-    bottom:0;
-    list-style-type:none;
-    display:${({dropdownOpen}) =>
-    (dropdownOpen === true && 'flex') ||
-    (dropdownOpen === false && 'none')
-};
-    flex-direction:column;
-    justift-content:center;
-    border:none;
-    background:transparent;
-    
-    z-index:2;
-    transition: all .5s;
-`
-const StyledOption = styled.span`
-    font-size:12px;
-    padding: 8px 12px;
-    margin:2px 0 0 15px;
-    color: white;
-    letter-spacing:0.1em;
-    font-weight:600;
-    outline:none;
-    background:#003bb8;
-    border-radius:30px;
-    &:hover{
-        cursor:pointer;
-    }
-`
-const DropOpen = styled.span`
-    display:flex;
-    font-size:12px;
-    margin-top:6px;
-    padding: 5px 10px;
-    cursor:pointer;
-    letter-spacing:0.1em;
-    color:#fff;
-    width: ${({open}) =>
-    (open === true && 'max-content') ||
-    (open === false && '0px')
-};
-    transition:all 1s;
-`
-const DropOpenIcon = styled(ChevronDown)`
-    margin-left:5px;
-`
-const DropCloseIcon = styled(ChevronUp)`
-    margin-left:5px;
-`
 const SearchBar =() => {
     const [open, setOpen] = useState(false);
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [filter, setFilter] = useState<string>('Players');
-    const dropdown = useRef<HTMLInputElement>(null);
     const queryText = useRef<HTMLInputElement>(null);
-    const closeAfterFilter = (e:{currentTarget:HTMLInputElement}) =>{
-        setFilter(e.currentTarget.innerText);
-        setDropdownOpen(false);
-    }
+    
 
-    const closeDropdown = (e) =>{
-        if(dropdown && dropdown.current){
-        if(dropdown.current.contains(e.target) ){
-            return;
-        } else{
-        setDropdownOpen(false);
-        }
-    }
-    }
-    const Search = (e) =>{
+   
+    const Search = (e: { keyCode: number; }):void =>{
         if(e.keyCode === 13 && queryText && queryText.current){
-            if(queryText.current.value.length <3){
-                console.log('Query must have atleast 3 letters')
-            }
-            if(filter === 'Competitions' && queryText.current.value.length >=3){
+            if(queryText.current.value.length >=3){
                 window.location.href = `/competitions/${queryText.current.value}`
             }
         }
     }
-    useEffect(() => {
-        document.addEventListener('mousedown', closeDropdown);
-        return () => {
-            document.removeEventListener('mousedown', closeDropdown)
-        }
-    }, [])
+    
     return(
         <NavSearch onKeyDown={Search}>
             <StyledDiv >
-                <StyledInput  ref={queryText} open={open} onClick={(()=>setOpen(true))} placeholder={`Search by ${filter}`}/>
-                <StyledFilter open={open} >
-                    <div ref={dropdown}>
-                    <DropOpen open={open} onClick={()=>setDropdownOpen(dropdownOpen === true ? false : true)}>{filter}{!dropdownOpen ? <DropOpenIcon size="18" /> : <DropCloseIcon size="18"/>}</DropOpen>
-                    <StyledDropdown dropdownOpen={dropdownOpen} >
-                        <StyledOption onClick={closeAfterFilter} >Players</StyledOption>
-                        <StyledOption onClick={closeAfterFilter} >Teams</StyledOption>
-                        <StyledOption onClick={closeAfterFilter} >Competitions</StyledOption>
-                    </StyledDropdown>
-                    </div>
-                </StyledFilter>
+                <StyledInput  ref={queryText} open={open} onClick={(()=>setOpen(true))} placeholder={`Search by Competitions`}/>
                 <StyledSearch open={open} onClick={()=>setOpen(open === false ? true : false)} />
             </StyledDiv>
         </NavSearch>

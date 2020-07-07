@@ -48,30 +48,6 @@ const FilterButton = styled.button`
     border-radius:5px;
     border-color:#003bb8;
 `
-interface Team{
-    name?:string;
-    id?:number,
-}
-interface StandingTable{
-    position?:number;
-    team:Team;
-    playedGames?:number;
-    goalsFor?:number;
-    goalsAgainst?:number;
-}
-interface StandingChild{
-    table:Array<any>;
-}
-interface Standings{
-    standings:StandingChild,
-}
-interface StandingsType{
-    standings:Standings;
-}
-
-
-
-
 
 const LeagueTable:FunctionComponent<{id:string}> = (props) => {
     const [filterLeague, setFilter] = useState<string>('A');

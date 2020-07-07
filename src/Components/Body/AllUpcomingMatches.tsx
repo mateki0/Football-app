@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledGridTable = styled.div`
     text-align:center;
     display:grid;
-    grid-template-columns: 150px 270px 250px 220px;
+    grid-template-columns: 150px 270px 250px 220px 200px;
     
     :nth-of-type(odd){
         background-color:rgba(0, 177, 59, 0.835);
@@ -30,7 +30,9 @@ const StyledA = styled.a`
     font-size:18px;
     color:#004ef5;
 `
-
+const StatusSpan = styled.span`
+    text-transform:capitalize
+`
 const AllUpcomingMatches = (props) => {
     return(
         <div>
@@ -39,8 +41,9 @@ const AllUpcomingMatches = (props) => {
                 <HeaderDiv>Home</HeaderDiv>
                 <HeaderDiv>Away</HeaderDiv>
                 <HeaderDiv>Date</HeaderDiv>
+                <HeaderDiv>Status</HeaderDiv>
             </StyledGridTable>
-            {props.data.matches.map((a: { id: string | number | undefined; homeTeam: { id: string; name: string; }; awayTeam: { id: string; name: string; };utcDate:string; },b: number)=>(
+            {props.data.matches.map((a: { id: string | number | undefined; homeTeam: { id: string; name: string; }; awayTeam: { id: string; name: string; };utcDate:string; status:string },b: number)=>(
                 <StyledGridTable key={a.id}>
                     <BodyDiv>
                         <StyledA href={`/match/`+a.id}>Match {b+1}:</StyledA>
@@ -53,6 +56,9 @@ const AllUpcomingMatches = (props) => {
                     </BodyDiv>
                     <BodyDiv>
                     <StyledA href={`/match/`+a.awayTeam.id}> {a.utcDate.replace(/T/g, ' ').slice(0,a.utcDate.length-4)}</StyledA>
+                    </BodyDiv>
+                    <BodyDiv>
+                       <StatusSpan> {a.status.toLowerCase()}</StatusSpan>
                     </BodyDiv>
                 </StyledGridTable>
                         ))}

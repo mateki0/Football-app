@@ -12,12 +12,12 @@ const StyledMain = styled.main`
     align-items:center;
     flex-direction:column;
 ` 
-const PlayerSearch = () => {
+const CompetitionsSearch = () => {
     const [searchedCompetitions, setSearchedCompetitions] = useState<Array<object>>([]);
     const [isCompetitionsLoading, setIsCompetitionsLoading] = useState(true);
     const {query} = useParams();
     useEffect(()=>{
-        const fetchPlayers = async(url: string) =>{
+        const fetchCompetitions = async(url: string) =>{
             const proxy = 'https://serene-temple-39805.herokuapp.com/'
             try{
               const result = await axios({method:'GET',
@@ -26,14 +26,13 @@ const PlayerSearch = () => {
                   'X-Auth-Token': process.env.REACT_APP_API_KEY,
               }});
               const filtered = result.data.competitions.filter(a=> a.name.toLowerCase().includes(query));
-              
               setSearchedCompetitions(filtered);
               setIsCompetitionsLoading(false);
             }catch (error){
                 console.log(error)
             }
           }
-          fetchPlayers('http://api.football-data.org/v2/competitions/')
+          fetchCompetitions('http://api.football-data.org/v2/competitions/')
     },[query])
     return(
         <StyledMain>
@@ -43,4 +42,4 @@ const PlayerSearch = () => {
         </StyledMain>
     )
 }
-export default PlayerSearch
+export default CompetitionsSearch
