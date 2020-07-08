@@ -1,7 +1,8 @@
-import React,{FunctionComponent} from 'react';
+import React from 'react';
 import AllUpcomingMatches from '../Body/AllUpcomingMatches'
 import styled from 'styled-components';
 import LoadingIcon from '../LoadingIcon';
+
 const StyledMain = styled.main`
     margin:100px auto 0 auto;
     height:100%;
@@ -23,19 +24,9 @@ const LeagueOver = styled.h1`
     color:#0247d9;
     text-align:center;
 `
-interface MatchesType{
-    
-        count:number;
-        matches:Array<any>;
-        competition:Object;
-    
-}
-interface DataType{
-    matches:MatchesType;
-    isMatchesLoading:boolean;
-}
 
-const UpcomingTable:FunctionComponent<{isMatchesLoading: any, matches: Array<any>}> = (props) =>{
+
+const UpcomingTable = (props) =>{
     if(!props.isMatchesLoading && props.matches['count']===0){
         return(
             <StyledMain>
@@ -44,7 +35,7 @@ const UpcomingTable:FunctionComponent<{isMatchesLoading: any, matches: Array<any
         )
     }
     if(!props.isMatchesLoading && props.matches['count']>0){
-    const stage:Array<DataType>= props.matches['matches'][0].stage.replace(/_/g, ' ').toLowerCase();
+    const stage:string = props.matches['matches'][0].stage.replace(/_/g, ' ').toLowerCase();
     return(
         <StyledMain>
             <StyledH1>{props.matches['competition'].name} {stage} stage.</StyledH1>

@@ -2,12 +2,12 @@ import React, {useState,useEffect} from 'react';
 import {useParams} from 'react-router';
 import axios from 'axios';
 import ScorersTable from './ScorersTable';
-
+import {IPropTypes} from './types'
 
 const BestScorers = () =>{
 
     let {id} = useParams();
-    const [players, setPlayers] = useState<Array<object>>([]);
+    const [players, setPlayers] = useState<IPropTypes[]>([]);
     const [isPlayersLoading, setIsPlayersLoading] = useState(true); 
     const [showMore, setShowMore] = useState(false);
     const more = ():void => {
@@ -42,7 +42,7 @@ const BestScorers = () =>{
   
   return(
     
-      <ScorersTable players={players} isPlayersLoading={isPlayersLoading} more={more} less={less} showMore={showMore}/>
+      <ScorersTable  players={players} isPlayersLoading={isPlayersLoading} more={more} less={less} showMore={showMore}/>
    
     
   )

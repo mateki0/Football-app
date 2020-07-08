@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import LeagueHeader from './LeagueHeader';
 import LeagueTable from './LeagueTable';
-
+import {ILeagueProps} from './types'
 const StyledMain = styled.main`
     margin:75px auto 0 auto;
     height:100%;
@@ -16,7 +16,7 @@ const StyledMain = styled.main`
 
 const LeaguePage = () =>{
     let {id} = useParams();
-    const [league, setLeague] = useState<Array<object>>([]);
+    const [league, setLeague] = useState<ILeagueProps[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() =>{
         

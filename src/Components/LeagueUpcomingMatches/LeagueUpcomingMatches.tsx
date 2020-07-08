@@ -3,15 +3,15 @@ import {useParams} from 'react-router';
 import UpcomingTable from './UpcomingTable'
 import axios from 'axios';
 import moment from 'moment';
-
+import {IDataType} from './types'
 
 const LeagueUpcomingMatches = () =>{
     let now = moment()
-    let from = now.format().slice(0, 10)
+    let from:string = now.format().slice(0, 10)
     let twoWeeks = now.add(14, 'days')
-    let to = twoWeeks.format().slice(0, 10);
+    let to:string = twoWeeks.format().slice(0, 10);
     
-    const [matches, setMatches] = useState<Array<object>>([]);
+    const [matches, setMatches] = useState<IDataType[]>([]);
     const [isMatchesLoading, setIsMatchesLoading] = useState(true); 
     let {id} = useParams();
       useEffect(()=>{
@@ -25,6 +25,7 @@ const LeagueUpcomingMatches = () =>{
             'X-Auth-Token': process.env.REACT_APP_API_KEY,
         }});
         setMatches(result.data);
+        console.log(result.data)
         setIsMatchesLoading(false);
       }catch (error){
           console.log(error)

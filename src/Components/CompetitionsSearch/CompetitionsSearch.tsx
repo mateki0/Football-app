@@ -4,6 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import SearchedCompetitionsTable from './SearchedCompetitionsTable'
 import LoadingIcon from '../LoadingIcon';
+import {ICompTypes} from './types'
 const StyledMain = styled.main`
     margin:120px auto 0 auto;
     height:100%;
@@ -13,7 +14,7 @@ const StyledMain = styled.main`
     flex-direction:column;
 ` 
 const CompetitionsSearch = () => {
-    const [searchedCompetitions, setSearchedCompetitions] = useState<Array<object>>([]);
+    const [searchedCompetitions, setSearchedCompetitions] = useState<ICompTypes[]>([]);
     const [isCompetitionsLoading, setIsCompetitionsLoading] = useState(true);
     const {query} = useParams();
     useEffect(()=>{
@@ -26,6 +27,7 @@ const CompetitionsSearch = () => {
                   'X-Auth-Token': process.env.REACT_APP_API_KEY,
               }});
               const filtered = result.data.competitions.filter(a=> a.name.toLowerCase().includes(query));
+              console.log(filtered)
               setSearchedCompetitions(filtered);
               setIsCompetitionsLoading(false);
             }catch (error){

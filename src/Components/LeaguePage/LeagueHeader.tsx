@@ -19,11 +19,11 @@ const CurrentDates = styled.span`
     padding:0 20px;
 `
 const LoadingDiv = styled.div`
-display:flex;
-justify-content:center;
-margin-top:15px ;
+    display:flex;
+    justify-content:center;
+    margin-top:15px ;
 `
-const LeagueHeader = (props) =>{
+const LeagueHeader = ({...props}) =>{
     
     if(props.isLoading === false){
     return(

@@ -19,7 +19,7 @@ const BodyDiv = styled.div`
 const TeamNameHref = styled.a`
     color:#0247d9;
 `
-const NationalLeague = (props) => (
+const NationalLeague = ({...props}) => (
     <StyledGridTable>
                     <BodyDiv>
                         {props.a.position}.

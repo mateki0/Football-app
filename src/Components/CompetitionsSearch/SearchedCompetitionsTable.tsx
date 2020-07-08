@@ -1,4 +1,4 @@
-import React,{FunctionComponent} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const StyledGridTable = styled.div`   
@@ -27,8 +27,7 @@ const HeaderDiv = styled.div`
 const TeamNameHref = styled.a`
     color:#0247d9;
 `
-const SearchedCompetitionsTable:FunctionComponent<{searchedCompetitions:Array<any>}> = (props) => {
-    console.log(props.searchedCompetitions)
+const SearchedCompetitionsTable = ({...props}) => {
     if (props.searchedCompetitions.length === 0){
         return(
             <BodyDiv>No matching results</BodyDiv>

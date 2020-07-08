@@ -1,4 +1,4 @@
-import React,{FunctionComponent} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import LoadingIcon from '../LoadingIcon';
 const StyledMain = styled.main`
@@ -55,7 +55,8 @@ display:flex;
 justify-content:center;
 margin-top:15px ;
 `
-const ScorersTable:FunctionComponent<{players: any, isPlayersLoading:boolean, more:any, less:any, showMore:boolean}> = (props) =>{
+
+const ScorersTable = ({...props}) =>{
     if(props.isPlayersLoading === false){
         console.log(props.players)
     return(

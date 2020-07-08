@@ -4,6 +4,7 @@ import UpcomingMatches from './AllUpcomingMatches';
 import axios from 'axios';
 import LoadingIcon from '../LoadingIcon';
 import moment from 'moment'
+import {IDefaultBodyProps} from './types'
 const StyledMain = styled.main`
     height:100%;
     margin:20px auto 0 auto;
@@ -45,11 +46,11 @@ padding:5px 10px;
 `
 const DefaultBody = () =>{
     
-    const [data, setData] = useState<Array<object>>([]);
+    const [data, setData] = useState<IDefaultBodyProps[]>([]);
     const [isDataLoading, setIsDataLoading] = useState(true);
     const fromDate = useRef<HTMLInputElement>(null);
     const toDate = useRef<HTMLInputElement>(null);
-    const [today, setToday ]= useState<string>('');
+    const [today, setToday] = useState<string>('');
     const [tomorrow, setTomorrow] = useState<string>('');
     
     
@@ -92,9 +93,12 @@ const DefaultBody = () =>{
             
             <TodayBest>
                 <StyledH1>Today's Best Matches:</StyledH1>
-                <DateDiv><DateSpan>Show matches from: </DateSpan><DateInput onChange={(e: { currentTarget: { value: React.SetStateAction<string>; }; })=>{setToday(e.currentTarget.value)}} type="date" defaultValue={today} ref={fromDate}/> 
-                <DateSpan>to</DateSpan>
-                <DateInput onChange={(e: { currentTarget: { value: React.SetStateAction<string>; }; })=>{setTomorrow(e.currentTarget.value)}} type="date" defaultValue={tomorrow} ref={toDate}/></DateDiv>
+                <DateDiv>
+                    <DateSpan>Show matches from: </DateSpan>
+                    <DateInput onChange={(e: { currentTarget: { value: React.SetStateAction<string>; }; })=>{setToday(e.currentTarget.value)}} type="date" defaultValue={today} ref={fromDate}/> 
+                    <DateSpan>to</DateSpan>
+                    <DateInput onChange={(e: { currentTarget: { value: React.SetStateAction<string>; }; })=>{setTomorrow(e.currentTarget.value)}} type="date" defaultValue={tomorrow} ref={toDate}/>
+                </DateDiv>
                 {(!isDataLoading) ?
                 <UpcomingMatches data={data} isDataLoading={isDataLoading} />
                 : <LoadingDiv><LoadingIcon/></LoadingDiv>

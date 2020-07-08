@@ -1,8 +1,9 @@
-import React,{FunctionComponent, useState, useEffect} from 'react';
+import React,{ useState, useEffect} from 'react';
 import NationalLeague from './NationalLeague'
 import styled from 'styled-components';
 import LoadingIcon from '../LoadingIcon';
-import axios from 'axios'
+import axios from 'axios';
+import {ILeagueTableProps, IStandings} from './types'
 const StyledTableDiv = styled.div`
 margin-top:50px;`
 const StyledGridTable = styled.div`   
@@ -49,10 +50,10 @@ const FilterButton = styled.button`
     border-color:#003bb8;
 `
 
-const LeagueTable:FunctionComponent<{id:string}> = (props) => {
+const LeagueTable = ({...props}) => {
     const [filterLeague, setFilter] = useState<string>('A');
-    const [defaultTable, setDefaultTable] = useState<Array<any>>([]);
-    const [leagueTable, setLeagueTable] = useState<Array<object>>([]);
+    const [defaultTable, setDefaultTable] = useState<IStandings[]>([]);
+    const [leagueTable, setLeagueTable] = useState<ILeagueTableProps[]>([]);
     const [isTableLoading, setIsTableLoading] = useState(true)
     useEffect(() =>{
     

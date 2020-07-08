@@ -33,7 +33,7 @@ const StyledA = styled.a`
 const StatusSpan = styled.span`
     text-transform:capitalize
 `
-const AllUpcomingMatches = (props) => {
+const AllUpcomingMatches = ({...props}) => {
     return(
         <div>
             <StyledGridTable>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import LoadingIcon from '../LoadingIcon';
 import moment from 'moment';
-
+import {ISquad, IResultData} from './types'
 const StyledMain = styled.main`
     margin:75px auto 0 auto;
     height:100%;
@@ -106,10 +106,11 @@ const FilterButton = styled.button`
 const CoachSpan = styled.span`
     text-transform: capitalize;
 `
+
 const TeamTable = () =>{
     let {id} = useParams();
-    const [team, setTeam] = useState<Array<object>>([]);
-    const [squad, setSquad] = useState<Array<object>>([])
+    const [team, setTeam] = useState<IResultData[]>([]);
+    const [squad, setSquad] = useState<ISquad[]>([])
     const [isTeamLoading, setIsTeamLoading] = useState(true);
     const [filter, setFilter] = useState<string>('All');
         interface TeamType{
@@ -145,7 +146,6 @@ const TeamTable = () =>{
     
     useEffect(() =>{
         let currentFilter:Array<any>;
-        console.log(filter)
         if(filter === 'Forwards'){
             currentFilter = team['squad'].filter((a: { position: string; })=> {return a.position === 'Attacker'});
             setSquad(currentFilter)
