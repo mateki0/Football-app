@@ -5,6 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 import {IDataType} from './types'
 
+
 const LeagueUpcomingMatches = () =>{
     let now = moment()
     let from:string = now.format().slice(0, 10)
@@ -25,7 +26,6 @@ const LeagueUpcomingMatches = () =>{
             'X-Auth-Token': process.env.REACT_APP_API_KEY,
         }});
         setMatches(result.data);
-        console.log(result.data)
         setIsMatchesLoading(false);
       }catch (error){
           console.log(error)

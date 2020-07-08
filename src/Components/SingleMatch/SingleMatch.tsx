@@ -24,20 +24,18 @@ const SingleMatch = () =>{
         const fetchMatches = async(url: string) =>{
             const proxy = 'https://serene-temple-39805.herokuapp.com/'
             try{
-              const result = await axios({method:'GET',
-              url: proxy+url,
-              headers:{
-                  'X-Auth-Token': process.env.REACT_APP_API_KEY,
-                  
-              }});
-              
-              setMatches(result.data);
-              console.log(result.data)
-              setIsMatchesLoading(false);
+                const result = await axios({
+                    method:'GET',
+                    url: proxy+url,
+                    headers:{
+                        'X-Auth-Token': process.env.REACT_APP_API_KEY,
+                    }});
+                setMatches(result.data);
+                setIsMatchesLoading(false);
             }catch (error){
                 console.log(error)
             }
-          }
+        }
             fetchMatches('http://api.football-data.org/v2/matches/'+ id)
         },[id])
         if(isMatchesLoading){

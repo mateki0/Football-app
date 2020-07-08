@@ -14,6 +14,7 @@ import Team from './Components/Team/Team';
 import SearchBar from './Components/SearchBar';
 import CompetitionsSearch from './Components/CompetitionsSearch/CompetitionsSearch';
 import SingleMatch from './Components/SingleMatch/SingleMatch';
+import SinglePlayer from './Components/SinglePlayer/SinglePlayer';
 
 const StyledDiv = styled.div`
 
@@ -73,6 +74,13 @@ const App = () => {
           <div>
             <SearchBar/>
             <SingleMatch/>
+          </div>
+        </Route>
+        <Route exact path='/player/:id'>
+          <Navbar/>
+          <div>
+            <SearchBar/>
+            <SinglePlayer/>
           </div>
         </Route>
       </Switch>

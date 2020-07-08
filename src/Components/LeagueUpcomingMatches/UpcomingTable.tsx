@@ -26,7 +26,8 @@ const LeagueOver = styled.h1`
 `
 
 
-const UpcomingTable = (props) =>{
+const UpcomingTable = ({...props}) =>{
+    
     if(!props.isMatchesLoading && props.matches['count']===0){
         return(
             <StyledMain>

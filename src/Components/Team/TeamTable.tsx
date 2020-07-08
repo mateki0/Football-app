@@ -113,34 +113,23 @@ const TeamTable = () =>{
     const [squad, setSquad] = useState<ISquad[]>([])
     const [isTeamLoading, setIsTeamLoading] = useState(true);
     const [filter, setFilter] = useState<string>('All');
-        interface TeamType{
-        name:string;
-        id:number;
-        position:string;
-        nationality:string;
-        role:string;
-        dateOfBirth:string;
-    }
-    interface Mapped{
-        a:TeamType;
-    }
     useEffect(()=>{
         const fetchTeam = async (url:string)=>{
             const proxy = 'https://serene-temple-39805.herokuapp.com/'
             try{
-              const result = await axios({method:'GET',
-              url: proxy+url,
-              headers:{
-                  'X-Auth-Token': process.env.REACT_APP_API_KEY,
-              }});
-              setTeam(result.data);
-              setSquad(result.data['squad'])
-              setIsTeamLoading(false);
+                const result = await axios({method:'GET',
+                url: proxy+url,
+                headers:{
+                    'X-Auth-Token': process.env.REACT_APP_API_KEY,
+                }});
+                setTeam(result.data);
+                setSquad(result.data['squad'])
+                setIsTeamLoading(false);
             }catch (error){
                 console.log(error)
             }
-          }
-          fetchTeam(`http://api.football-data.org/v2/teams/${id}`)
+        }
+        fetchTeam(`http://api.football-data.org/v2/teams/${id}`)
     },[id])
     
     

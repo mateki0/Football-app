@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import axios from 'axios';
 import LeagueHeader from './LeagueHeader';
 import LeagueTable from './LeagueTable';
-import {ILeagueProps} from './types'
+import {ILeagueProps} from './types';
+import LoadingIcon from '../LoadingIcon';
 const StyledMain = styled.main`
     margin:75px auto 0 auto;
     height:100%;
@@ -13,7 +14,11 @@ const StyledMain = styled.main`
     align-items:center;
     flex-direction:column;
 `
-
+const LoadingDiv = styled.div`
+display:flex;
+justify-content:center;
+margin-top:15px ;
+`
 const LeaguePage = () =>{
     let {id} = useParams();
     const [league, setLeague] = useState<ILeagueProps[]>([]);
@@ -45,10 +50,13 @@ const LeaguePage = () =>{
     }, [id])
     
     
-    
+    if(isLoading){
+        return(
+            <LoadingDiv><LoadingIcon/></LoadingDiv>
+        )
+    }
     return(
         <StyledMain>
-            
             <LeagueHeader league={league} isLoading={isLoading}/>
             <LeagueTable id={id} />
         </StyledMain>
