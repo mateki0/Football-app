@@ -1,15 +1,21 @@
-name: Auto Assign v2
+name: Add bugs to bugs project
 
 on:
   issues:
-    types: [opened]
+    types:
+      - opened
+  pull_request:
+    types:
+      - labeled
+
 jobs:
-  createCard:
+  add-to-project:
+    name: Add issue to project
     runs-on: ubuntu-latest
     steps:
-      - name: Create or Update Project Card
-        uses: peter-evans/create-or-update-project-card@v2
+      - uses: actions/add-to-project@main
         with:
-          token: ${{ secrets.MY_GITHUB_TOKEN }}
-          project-name: footballApp
-          column-name: ToDo
+          project-url: https://github.com/users/mateki0/projects/1
+          github-token: ${{ secrets.MY_GITHUB_TOKEN }}
+          labeled: bug, needs-triage
+          label-operator: OR
