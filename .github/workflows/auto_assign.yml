@@ -12,3 +12,4 @@ jobs:
         if: github.event.action == 'opened'
         with:
           project: "https://github.com/users/mateki0/projects/1"
+          column_name: "ToDo"
