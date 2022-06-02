@@ -11,6 +11,5 @@ jobs:
         uses: peter-evans/create-or-update-project-card@v2
         with:
           token: ${{ secrets.MY_GITHUB_TOKEN }}
-          project-location: https://github.com/users/mateki0/projects/1
           project-name: footballApp
           column-name: ToDo
