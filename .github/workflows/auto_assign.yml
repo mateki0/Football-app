@@ -1,9 +1,6 @@
 name: Auto Assign to Project(s)
 
-on:
-  push
-
- MY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+on: push
 
 jobs:
   assign_one_project:
@@ -14,5 +11,5 @@ jobs:
         uses: srggrs/assign-one-project-github-action@1.2.1
         if: github.event.action == 'opened'
         with:
-          project: 'https://github.com/users/mateki0/projects/1'
-         
+          project: "https://github.com/users/mateki0/projects/1"
+          column_name: "ToDo"
