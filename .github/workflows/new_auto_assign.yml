@@ -1,0 +1,15 @@
+name: Auto Assign v2
+
+on:
+  issues:
+    types: [opened]
+jobs:
+  createCard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create or Update Project Card
+        uses: peter-evans/create-or-update-project-card@v2
+        with:
+          project-location: https://github.com/users/mateki0/projects/1
+          project-name: footballApp
+          column-name: ToDo
