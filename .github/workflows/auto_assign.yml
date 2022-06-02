@@ -1,6 +1,12 @@
 name: Auto Assign to Project(s)
 
-on: push
+on:
+  issues:
+    types: [opened, labeled]
+  pull_request:
+    types: [opened, labeled]
+  issue_comment:
+    types: [created]
 
 jobs:
   assign_one_project:
