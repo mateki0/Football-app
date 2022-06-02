@@ -4,10 +4,6 @@ on:
   issues:
     types:
       - opened
-      - labeled
-  pull_request:
-    types:
-      - labeled
 
 jobs:
   add-to-project:
@@ -18,5 +14,5 @@ jobs:
         with:
           project-url: https://github.com/users/mateki0/projects/1
           github-token: ${{ secrets.MY_GITHUB_TOKEN }}
-          labeled: bug, needs-triage
+          labeled: bug, android, build_or_config_issue, dependencies_update_request, dependecies, documentation, enchancement, good first issue, help wanted, idea, iOS, question, typescript
           label-operator: OR
