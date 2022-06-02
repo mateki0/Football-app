@@ -3,6 +3,10 @@ name: Auto Assign to Project(s)
 on:
   issues:
     types: [opened, labeled]
+  pull_request:
+    types: [opened, labeled]
+
+MY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   assign_one_project:
