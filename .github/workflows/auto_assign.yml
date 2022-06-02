@@ -2,8 +2,6 @@ name: Auto Assign to Project(s)
 
 on:
   push
-  pull_request:
-    types: [opened, labeled]
 
  MY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
